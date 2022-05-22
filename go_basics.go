@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 // CANNOT use colon to define variables outside a function
@@ -36,6 +37,13 @@ func variableSimplerWay() {
 	fmt.Println(a, b, s)
 }
 
+func consts() {
+	const filename = "abc.txt"
+	const a, b = 3, 4
+	c := int(math.Sqrt(a*a + b*b))
+	fmt.Println(filename, c)
+}
+
 func main() {
 	//fmt.Println("hello")
 	//fmt.Println(runtime.GOARCH) // check your code is running on what architecture
@@ -44,4 +52,5 @@ func main() {
 	variableWithNoTypes()
 	variableSimplerWay()
 	fmt.Println(aa, ss)
+	consts()
 }
