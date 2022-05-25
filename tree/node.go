@@ -1,10 +1,25 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type treeNode struct {
 	value       int
 	left, right *treeNode
+}
+
+func (node treeNode) print() {
+	fmt.Println(node.value)
+}
+
+func (node *treeNode) setValue(value int) {
+	node.value = value
+}
+
+func createNode(value int) *treeNode {
+	// factory function
+	return &treeNode{value: value}
 }
 
 func main() {
@@ -14,12 +29,18 @@ func main() {
 	root.left = &treeNode{}
 	root.right = &treeNode{5, nil, nil}
 	root.right.left = new(treeNode)
+	root.left.right = createNode(2)
 
-	nodes := []treeNode{
-		{value: 3},
-		{},
-		{6, nil, &root},
-	}
+	//nodes := []treeNode{
+	//	{value: 3},
+	//	{},
+	//	{6, nil, &root},
+	//}
+	//
+	//fmt.Println(nodes)
 
-	fmt.Println(nodes)
+	root.print()
+
+	root.right.left.setValue(4)
+	root.right.left.print()
 }
