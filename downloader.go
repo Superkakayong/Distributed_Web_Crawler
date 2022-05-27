@@ -1,19 +1,23 @@
 package main
 
 import (
-	"Distributed_Web_Crawler/infra"
+	"Distributed_Web_Crawler/testing"
 	"fmt"
 )
 
-func getRetriever() infra.Retriever {
-	return infra.Retriever{}
+func getRetriever() retriever {
+	return testing.Retriever{}
+}
+
+type retriever interface {
+	Get(string) string
 }
 
 func main() {
 	//fmt.Printf("%s\n", retrieve("https://imooc.com"))
 
-	var retriever infra.Retriever = getRetriever()
+	var r retriever = getRetriever()
 	//retriever := getRetriever()
 
-	fmt.Println(retriever.Get("https://imooc.com"))
+	fmt.Println(r.Get("https://imooc.com"))
 }
