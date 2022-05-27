@@ -1,26 +1,19 @@
 package main
 
 import (
+	"Distributed_Web_Crawler/infra"
 	"fmt"
-	"io/ioutil"
-	"net/http"
 )
 
-func retrieve(url string) string {
-	response, err := http.Get("https://www.imooc.com")
-
-	if err != nil {
-		panic(err)
-	}
-
-	defer response.Body.Close()
-
-	bytes, _ := ioutil.ReadAll(response.Body)
-
-	return string(bytes)
+func getRetriever() infra.Retriever {
+	return infra.Retriever{}
 }
 
 func main() {
 	//fmt.Printf("%s\n", retrieve("https://imooc.com"))
-	fmt.Println(retrieve("https://imooc.com"))
+
+	var retriever infra.Retriever = getRetriever()
+	//retriever := getRetriever()
+
+	fmt.Println(retriever.Get("https://imooc.com"))
 }
