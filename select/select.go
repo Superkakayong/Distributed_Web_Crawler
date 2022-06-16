@@ -9,7 +9,7 @@ func main() {
 
 	select {
 	case n := <-c1:
-		fmt.Println("Received from c1: ", n)
+		fmt.Println("Now receiving from c1: ", n)
 	case n := <-c2:
 		fmt.Println("Received from c2: ", n)
 	default:
