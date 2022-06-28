@@ -47,7 +47,7 @@ func (p point) at(grid [][]int) (int, bool) {
 	return grid[p.i][p.j], true
 }
 
-func walk(maze [][]int, start, end point) {
+func walk(maze [][]int, start, end point) [][]int {
 	steps := make([][]int, len(maze))
 	for i := range steps {
 		steps[i] = make([]int, len(maze[i]))
@@ -59,13 +59,37 @@ func walk(maze [][]int, start, end point) {
 		cur := Q[0]
 		Q = Q[1:]
 
+		if cur == end {
+			break
+		}
+
 		for _, dir := range dirs {
 			next := cur.add(dir)
 			// maze at next is 0 (can go)
 			// steps at next is 0 (haven't been)
 			// next != start (not the start point)
+			val, ok := next.at(maze)
+			if !ok || val == 1 {
+				continue
+			}
+
+			val, ok = next.at(steps)
+			if !ok || val != 0 {
+				continue
+			}
+
+			if next == start {
+				continue
+			}
+
+			curSteps, _ := cur.at(steps)
+			steps[next.i][next.j] = curSteps + 1
+
+			Q = append(Q, next)
 		}
 	}
+
+	return steps
 }
 
 func main() {
